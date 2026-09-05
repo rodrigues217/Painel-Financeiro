@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Painel Financeiro",
+    "slug": "painel-financeiro-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#241220"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.painelfinanceiro.mobile",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Usado para desbloquear o Painel Financeiro com Face ID."
+      }
+    },
+    "android": {
+      "package": "com.painelfinanceiro.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#241220"
+      }
+    }
+  }
+}
