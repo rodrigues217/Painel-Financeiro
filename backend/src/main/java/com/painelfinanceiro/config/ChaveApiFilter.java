@@ -1,4 +1,4 @@
-﻿package com.painelfinanceiro.config;
+package com.painelfinanceiro.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

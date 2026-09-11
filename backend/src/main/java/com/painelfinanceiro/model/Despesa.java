@@ -1,4 +1,4 @@
-﻿package com.painelfinanceiro.model;
+package com.painelfinanceiro.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
