@@ -1,8 +1,9 @@
-package com.painelfinanceiro.controller;
+﻿package com.painelfinanceiro.controller;
 
 import com.painelfinanceiro.model.Produto;
 import com.painelfinanceiro.repository.ProdutoRepository;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,12 @@ public class ProdutoController {
         if (!repository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        repository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        try {
+            repository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Nao e possivel excluir: existem receitas vinculadas a esse produto.");
+        }
     }
 }

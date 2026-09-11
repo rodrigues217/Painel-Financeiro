@@ -1,4 +1,4 @@
-package com.painelfinanceiro.model;
+﻿package com.painelfinanceiro.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -15,12 +15,12 @@ public class Despesa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "A categoria é obrigatória")
+    @NotNull(message = "A categoria e obrigatoria")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id", nullable = false)
     private CategoriaDespesa categoria;
 
-    @NotNull(message = "O valor é obrigatório")
+    @NotNull(message = "O valor e obrigatorio")
     @DecimalMin(value = "0.01", message = "O valor deve ser maior que zero")
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;
@@ -28,7 +28,10 @@ public class Despesa {
     @Column(length = 255)
     private String descricao;
 
-    @NotNull(message = "A data da despesa é obrigatória")
+    @Column(length = 80)
+    private String criadoPor;
+
+    @NotNull(message = "A data da despesa e obrigatoria")
     @Column(name = "data_despesa", nullable = false)
     private LocalDate dataDespesa;
 
@@ -51,6 +54,9 @@ public class Despesa {
 
     public String getDescricao() { return descricao; }
     public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getCriadoPor() { return criadoPor; }
+    public void setCriadoPor(String criadoPor) { this.criadoPor = criadoPor; }
 
     public LocalDate getDataDespesa() { return dataDespesa; }
     public void setDataDespesa(LocalDate dataDespesa) { this.dataDespesa = dataDespesa; }

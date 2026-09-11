@@ -1,4 +1,4 @@
-package com.painelfinanceiro.controller;
+﻿package com.painelfinanceiro.controller;
 
 import com.painelfinanceiro.model.Produto;
 import com.painelfinanceiro.model.Receita;
@@ -39,6 +39,7 @@ public class ReceitaController {
         Receita receita = new Receita();
         receita.setValor(request.valor());
         receita.setDescricao(request.descricao());
+        receita.setCriadoPor(request.criadoPor());
         receita.setDataReceita(request.dataReceita());
         receita.setProduto(buscarProduto(request.produtoId()));
         return ResponseEntity.ok(receitaRepository.save(receita));
@@ -50,6 +51,7 @@ public class ReceitaController {
                 .map(receita -> {
                     receita.setValor(request.valor());
                     receita.setDescricao(request.descricao());
+                    receita.setCriadoPor(request.criadoPor());
                     receita.setDataReceita(request.dataReceita());
                     receita.setProduto(buscarProduto(request.produtoId()));
                     return ResponseEntity.ok(receitaRepository.save(receita));
@@ -71,5 +73,5 @@ public class ReceitaController {
         return produtoRepository.findById(produtoId).orElse(null);
     }
 
-    public record ReceitaRequest(BigDecimal valor, String descricao, LocalDate dataReceita, Long produtoId) {}
+    public record ReceitaRequest(BigDecimal valor, String descricao, String criadoPor, LocalDate dataReceita, Long produtoId) {}
 }

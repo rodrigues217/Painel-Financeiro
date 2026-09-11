@@ -1,4 +1,4 @@
-package com.painelfinanceiro.controller;
+﻿package com.painelfinanceiro.controller;
 
 import com.painelfinanceiro.model.CategoriaDespesa;
 import com.painelfinanceiro.model.Despesa;
@@ -25,7 +25,6 @@ public class DespesaController {
         this.categoriaDespesaRepository = categoriaDespesaRepository;
     }
 
-    // GET /api/despesas?inicio=2026-08-01&fim=2026-08-31
     @GetMapping
     public List<Despesa> listar(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
@@ -40,12 +39,13 @@ public class DespesaController {
         CategoriaDespesa categoria = categoriaDespesaRepository.findById(request.categoriaId())
                 .orElse(null);
         if (categoria == null) {
-            return ResponseEntity.badRequest().body("Categoria informada não existe.");
+            return ResponseEntity.badRequest().body("Categoria informada nao existe.");
         }
         Despesa despesa = new Despesa();
         despesa.setCategoria(categoria);
         despesa.setValor(request.valor());
         despesa.setDescricao(request.descricao());
+        despesa.setCriadoPor(request.criadoPor());
         despesa.setDataDespesa(request.dataDespesa());
         return ResponseEntity.ok(despesaRepository.save(despesa));
     }
@@ -57,11 +57,12 @@ public class DespesaController {
                     CategoriaDespesa categoria = categoriaDespesaRepository.findById(request.categoriaId())
                             .orElse(null);
                     if (categoria == null) {
-                        return ResponseEntity.badRequest().body("Categoria informada não existe.");
+                        return ResponseEntity.badRequest().body("Categoria informada nao existe.");
                     }
                     despesa.setCategoria(categoria);
                     despesa.setValor(request.valor());
                     despesa.setDescricao(request.descricao());
+                    despesa.setCriadoPor(request.criadoPor());
                     despesa.setDataDespesa(request.dataDespesa());
                     return ResponseEntity.ok(despesaRepository.save(despesa));
                 })
@@ -77,5 +78,5 @@ public class DespesaController {
         return ResponseEntity.noContent().build();
     }
 
-    public record DespesaRequest(Long categoriaId, java.math.BigDecimal valor, String descricao, LocalDate dataDespesa) {}
+    public record DespesaRequest(Long categoriaId, java.math.BigDecimal valor, String descricao, String criadoPor, LocalDate dataDespesa) {}
 }
